@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * This is the provided NumberTriangle class to be used in this coding task.
@@ -110,7 +111,8 @@ public class NumberTriangle {
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
 
 
-        // TODO define any variables that you want to use to store things
+        boolean firstLineRead = false;
+        ArrayList<NumberTriangle> previousNodeList = new ArrayList<>();
 
         // will need to return the top of the NumberTriangle,
         // so might want a variable for that.
@@ -119,14 +121,38 @@ public class NumberTriangle {
         String line = br.readLine();
         while (line != null) {
 
-            // remove when done; this line is included so running starter code prints the contents of the file
-            System.out.println(line);
+            if (!firstLineRead) {
+                top = new NumberTriangle(Integer.parseInt(line));
+                previousNodeList.add(top);
+                firstLineRead = true;
+            }
 
-            // TODO process the line
+            else {
+                String[] numberStringList = line.split(" ");
+                int[] numberIntList = new int[numberStringList.length];
+
+                for (int i = 0; i < numberStringList.length; i++) {
+                    numberIntList[i] = Integer.parseInt(numberStringList[i]);
+                }
+
+                ArrayList<NumberTriangle> nodeList = new ArrayList();
+                for (int i = 0; i < numberIntList.length; i++) {
+                    nodeList.add(new NumberTriangle(numberIntList[i]));
+                }
+
+                for (int i = 0; i < previousNodeList.size(); i++) {
+                    previousNodeList.get(i).setLeft(nodeList.get(i));
+                    previousNodeList.get(i).setRight(nodeList.get(i + 1));
+                }
+
+                previousNodeList = nodeList;
+            }
+
 
             //read the next line
             line = br.readLine();
         }
+
         br.close();
         return top;
     }
