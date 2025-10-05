@@ -136,7 +136,7 @@ public class NumberTriangle {
 
 
         boolean firstLineRead = false;
-        ArrayList<NumberTriangle> previousNodeList = new ArrayList<>();
+        ArrayList<NumberTriangle> previousNodeList = new ArrayList<NumberTriangle>();
 
         // will need to return the top of the NumberTriangle,
         // so might want a variable for that.
@@ -159,7 +159,7 @@ public class NumberTriangle {
                     numberIntList[i] = Integer.parseInt(numberStringList[i]);
                 }
 
-                ArrayList<NumberTriangle> nodeList = new ArrayList();
+                ArrayList<NumberTriangle> nodeList = new ArrayList<NumberTriangle>();
                 for (int i = 0; i < numberIntList.length; i++) {
                     nodeList.add(new NumberTriangle(numberIntList[i]));
                 }
